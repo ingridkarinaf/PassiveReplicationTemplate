@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package template;
+option go_package = "https://github.com/ingridkarinaf/PassiveReplicationTemplate;template";
+
+service TemplateService {
+    rpc templateCall (templRequest) returns (templReply) {}
+}
+
+message templRequest {
+    int32 id = 1;
+}
+
+message templReply {
+    int32 id = 1;
+}
