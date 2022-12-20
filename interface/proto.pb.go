@@ -20,16 +20,17 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type TemplRequest struct {
+type UpdateRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id    int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Value int32 `protobuf:"varint,2,opt,name=value,proto3" json:"value,omitempty"`
 }
 
-func (x *TemplRequest) Reset() {
-	*x = TemplRequest{}
+func (x *UpdateRequest) Reset() {
+	*x = UpdateRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_interface_proto_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -37,13 +38,13 @@ func (x *TemplRequest) Reset() {
 	}
 }
 
-func (x *TemplRequest) String() string {
+func (x *UpdateRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*TemplRequest) ProtoMessage() {}
+func (*UpdateRequest) ProtoMessage() {}
 
-func (x *TemplRequest) ProtoReflect() protoreflect.Message {
+func (x *UpdateRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_interface_proto_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -55,28 +56,35 @@ func (x *TemplRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TemplRequest.ProtoReflect.Descriptor instead.
-func (*TemplRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateRequest.ProtoReflect.Descriptor instead.
+func (*UpdateRequest) Descriptor() ([]byte, []int) {
 	return file_interface_proto_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *TemplRequest) GetId() int32 {
+func (x *UpdateRequest) GetId() int32 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-type TemplReply struct {
+func (x *UpdateRequest) GetValue() int32 {
+	if x != nil {
+		return x.Value
+	}
+	return 0
+}
+
+type UpdateReply struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Outcome bool `protobuf:"varint,1,opt,name=outcome,proto3" json:"outcome,omitempty"`
 }
 
-func (x *TemplReply) Reset() {
-	*x = TemplReply{}
+func (x *UpdateReply) Reset() {
+	*x = UpdateReply{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_interface_proto_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -84,13 +92,13 @@ func (x *TemplReply) Reset() {
 	}
 }
 
-func (x *TemplReply) String() string {
+func (x *UpdateReply) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*TemplReply) ProtoMessage() {}
+func (*UpdateReply) ProtoMessage() {}
 
-func (x *TemplReply) ProtoReflect() protoreflect.Message {
+func (x *UpdateReply) ProtoReflect() protoreflect.Message {
 	mi := &file_interface_proto_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -102,14 +110,108 @@ func (x *TemplReply) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TemplReply.ProtoReflect.Descriptor instead.
-func (*TemplReply) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateReply.ProtoReflect.Descriptor instead.
+func (*UpdateReply) Descriptor() ([]byte, []int) {
 	return file_interface_proto_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *TemplReply) GetId() int32 {
+func (x *UpdateReply) GetOutcome() bool {
+	if x != nil {
+		return x.Outcome
+	}
+	return false
+}
+
+type RetrieveRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *RetrieveRequest) Reset() {
+	*x = RetrieveRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_interface_proto_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RetrieveRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RetrieveRequest) ProtoMessage() {}
+
+func (x *RetrieveRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_interface_proto_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RetrieveRequest.ProtoReflect.Descriptor instead.
+func (*RetrieveRequest) Descriptor() ([]byte, []int) {
+	return file_interface_proto_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *RetrieveRequest) GetId() int32 {
 	if x != nil {
 		return x.Id
+	}
+	return 0
+}
+
+type RetrieveReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Value int32 `protobuf:"varint,2,opt,name=value,proto3" json:"value,omitempty"`
+}
+
+func (x *RetrieveReply) Reset() {
+	*x = RetrieveReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_interface_proto_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RetrieveReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RetrieveReply) ProtoMessage() {}
+
+func (x *RetrieveReply) ProtoReflect() protoreflect.Message {
+	mi := &file_interface_proto_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RetrieveReply.ProtoReflect.Descriptor instead.
+func (*RetrieveReply) Descriptor() ([]byte, []int) {
+	return file_interface_proto_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *RetrieveReply) GetValue() int32 {
+	if x != nil {
+		return x.Value
 	}
 	return 0
 }
@@ -119,21 +221,31 @@ var File_interface_proto_proto protoreflect.FileDescriptor
 var file_interface_proto_proto_rawDesc = []byte{
 	0x0a, 0x15, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x66, 0x61, 0x63, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x08, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74,
-	0x65, 0x22, 0x1e, 0x0a, 0x0c, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69,
-	0x64, 0x22, 0x1c, 0x0a, 0x0a, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12,
-	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x32,
-	0x51, 0x0a, 0x0f, 0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69,
-	0x63, 0x65, 0x12, 0x3e, 0x0a, 0x0c, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x43, 0x61,
-	0x6c, 0x6c, 0x12, 0x16, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x2e, 0x74, 0x65,
-	0x6d, 0x70, 0x6c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x14, 0x2e, 0x74, 0x65, 0x6d,
-	0x70, 0x6c, 0x61, 0x74, 0x65, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x52, 0x65, 0x70, 0x6c, 0x79,
-	0x22, 0x00, 0x42, 0x46, 0x5a, 0x44, 0x68, 0x74, 0x74, 0x70, 0x73, 0x3a, 0x2f, 0x2f, 0x67, 0x69,
-	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x6e, 0x67, 0x72, 0x69, 0x64, 0x6b,
-	0x61, 0x72, 0x69, 0x6e, 0x61, 0x66, 0x2f, 0x50, 0x61, 0x73, 0x73, 0x69, 0x76, 0x65, 0x52, 0x65,
-	0x70, 0x6c, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74,
-	0x65, 0x3b, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x65, 0x22, 0x35, 0x0a, 0x0d, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02,
+	0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x05, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x27, 0x0a, 0x0b, 0x55, 0x70, 0x64, 0x61,
+	0x74, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x18, 0x0a, 0x07, 0x6f, 0x75, 0x74, 0x63, 0x6f,
+	0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x6f, 0x75, 0x74, 0x63, 0x6f, 0x6d,
+	0x65, 0x22, 0x21, 0x0a, 0x0f, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x65, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05,
+	0x52, 0x02, 0x69, 0x64, 0x22, 0x25, 0x0a, 0x0d, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x65,
+	0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x05, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x32, 0x87, 0x01, 0x0a, 0x07,
+	0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x3a, 0x0a, 0x06, 0x55, 0x70, 0x64, 0x61, 0x74,
+	0x65, 0x12, 0x17, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x2e, 0x55, 0x70, 0x64,
+	0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x15, 0x2e, 0x74, 0x65, 0x6d,
+	0x70, 0x6c, 0x61, 0x74, 0x65, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x70, 0x6c,
+	0x79, 0x22, 0x00, 0x12, 0x40, 0x0a, 0x08, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x65, 0x12,
+	0x19, 0x2e, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x2e, 0x52, 0x65, 0x74, 0x72, 0x69,
+	0x65, 0x76, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x17, 0x2e, 0x74, 0x65, 0x6d,
+	0x70, 0x6c, 0x61, 0x74, 0x65, 0x2e, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x65, 0x52, 0x65,
+	0x70, 0x6c, 0x79, 0x22, 0x00, 0x42, 0x46, 0x5a, 0x44, 0x68, 0x74, 0x74, 0x70, 0x73, 0x3a, 0x2f,
+	0x2f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x69, 0x6e, 0x67, 0x72,
+	0x69, 0x64, 0x6b, 0x61, 0x72, 0x69, 0x6e, 0x61, 0x66, 0x2f, 0x50, 0x61, 0x73, 0x73, 0x69, 0x76,
+	0x65, 0x52, 0x65, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x65, 0x6d, 0x70,
+	0x6c, 0x61, 0x74, 0x65, 0x3b, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -148,16 +260,20 @@ func file_interface_proto_proto_rawDescGZIP() []byte {
 	return file_interface_proto_proto_rawDescData
 }
 
-var file_interface_proto_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_interface_proto_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_interface_proto_proto_goTypes = []interface{}{
-	(*TemplRequest)(nil), // 0: template.templRequest
-	(*TemplReply)(nil),   // 1: template.templReply
+	(*UpdateRequest)(nil),   // 0: template.UpdateRequest
+	(*UpdateReply)(nil),     // 1: template.UpdateReply
+	(*RetrieveRequest)(nil), // 2: template.RetrieveRequest
+	(*RetrieveReply)(nil),   // 3: template.RetrieveReply
 }
 var file_interface_proto_proto_depIdxs = []int32{
-	0, // 0: template.TemplateService.templateCall:input_type -> template.templRequest
-	1, // 1: template.TemplateService.templateCall:output_type -> template.templReply
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	0, // 0: template.Service.Update:input_type -> template.UpdateRequest
+	2, // 1: template.Service.Retrieve:input_type -> template.RetrieveRequest
+	1, // 2: template.Service.Update:output_type -> template.UpdateReply
+	3, // 3: template.Service.Retrieve:output_type -> template.RetrieveReply
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -170,7 +286,7 @@ func file_interface_proto_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_interface_proto_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TemplRequest); i {
+			switch v := v.(*UpdateRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -182,7 +298,31 @@ func file_interface_proto_proto_init() {
 			}
 		}
 		file_interface_proto_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TemplReply); i {
+			switch v := v.(*UpdateReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_interface_proto_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RetrieveRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_interface_proto_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RetrieveReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -200,7 +340,7 @@ func file_interface_proto_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_interface_proto_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

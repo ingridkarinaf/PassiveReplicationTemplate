@@ -18,86 +18,122 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// TemplateServiceClient is the client API for TemplateService service.
+// ServiceClient is the client API for Service service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type TemplateServiceClient interface {
-	TemplateCall(ctx context.Context, in *TemplRequest, opts ...grpc.CallOption) (*TemplReply, error)
+type ServiceClient interface {
+	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateReply, error)
+	Retrieve(ctx context.Context, in *RetrieveRequest, opts ...grpc.CallOption) (*RetrieveReply, error)
 }
 
-type templateServiceClient struct {
+type serviceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewTemplateServiceClient(cc grpc.ClientConnInterface) TemplateServiceClient {
-	return &templateServiceClient{cc}
+func NewServiceClient(cc grpc.ClientConnInterface) ServiceClient {
+	return &serviceClient{cc}
 }
 
-func (c *templateServiceClient) TemplateCall(ctx context.Context, in *TemplRequest, opts ...grpc.CallOption) (*TemplReply, error) {
-	out := new(TemplReply)
-	err := c.cc.Invoke(ctx, "/template.TemplateService/templateCall", in, out, opts...)
+func (c *serviceClient) Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*UpdateReply, error) {
+	out := new(UpdateReply)
+	err := c.cc.Invoke(ctx, "/template.Service/Update", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// TemplateServiceServer is the server API for TemplateService service.
-// All implementations must embed UnimplementedTemplateServiceServer
+func (c *serviceClient) Retrieve(ctx context.Context, in *RetrieveRequest, opts ...grpc.CallOption) (*RetrieveReply, error) {
+	out := new(RetrieveReply)
+	err := c.cc.Invoke(ctx, "/template.Service/Retrieve", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ServiceServer is the server API for Service service.
+// All implementations must embed UnimplementedServiceServer
 // for forward compatibility
-type TemplateServiceServer interface {
-	TemplateCall(context.Context, *TemplRequest) (*TemplReply, error)
-	mustEmbedUnimplementedTemplateServiceServer()
+type ServiceServer interface {
+	Update(context.Context, *UpdateRequest) (*UpdateReply, error)
+	Retrieve(context.Context, *RetrieveRequest) (*RetrieveReply, error)
+	mustEmbedUnimplementedServiceServer()
 }
 
-// UnimplementedTemplateServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedTemplateServiceServer struct {
+// UnimplementedServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedServiceServer struct {
 }
 
-func (UnimplementedTemplateServiceServer) TemplateCall(context.Context, *TemplRequest) (*TemplReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method TemplateCall not implemented")
+func (UnimplementedServiceServer) Update(context.Context, *UpdateRequest) (*UpdateReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedTemplateServiceServer) mustEmbedUnimplementedTemplateServiceServer() {}
+func (UnimplementedServiceServer) Retrieve(context.Context, *RetrieveRequest) (*RetrieveReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Retrieve not implemented")
+}
+func (UnimplementedServiceServer) mustEmbedUnimplementedServiceServer() {}
 
-// UnsafeTemplateServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to TemplateServiceServer will
+// UnsafeServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ServiceServer will
 // result in compilation errors.
-type UnsafeTemplateServiceServer interface {
-	mustEmbedUnimplementedTemplateServiceServer()
+type UnsafeServiceServer interface {
+	mustEmbedUnimplementedServiceServer()
 }
 
-func RegisterTemplateServiceServer(s grpc.ServiceRegistrar, srv TemplateServiceServer) {
-	s.RegisterService(&TemplateService_ServiceDesc, srv)
+func RegisterServiceServer(s grpc.ServiceRegistrar, srv ServiceServer) {
+	s.RegisterService(&Service_ServiceDesc, srv)
 }
 
-func _TemplateService_TemplateCall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(TemplRequest)
+func _Service_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TemplateServiceServer).TemplateCall(ctx, in)
+		return srv.(ServiceServer).Update(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/template.TemplateService/templateCall",
+		FullMethod: "/template.Service/Update",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TemplateServiceServer).TemplateCall(ctx, req.(*TemplRequest))
+		return srv.(ServiceServer).Update(ctx, req.(*UpdateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// TemplateService_ServiceDesc is the grpc.ServiceDesc for TemplateService service.
+func _Service_Retrieve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RetrieveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceServer).Retrieve(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/template.Service/Retrieve",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceServer).Retrieve(ctx, req.(*RetrieveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Service_ServiceDesc is the grpc.ServiceDesc for Service service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var TemplateService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "template.TemplateService",
-	HandlerType: (*TemplateServiceServer)(nil),
+var Service_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "template.Service",
+	HandlerType: (*ServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "templateCall",
-			Handler:    _TemplateService_TemplateCall_Handler,
+			MethodName: "Update",
+			Handler:    _Service_Update_Handler,
+		},
+		{
+			MethodName: "Retrieve",
+			Handler:    _Service_Retrieve_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
